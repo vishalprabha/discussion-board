@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!-- Reference code : https://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html -->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/online">
+<!--/*@thymesVar id="thread" type="com.discussion.board.entities.Thread"*/-->
+<head>
+    <title th:text="${thread.getTitle()}">Thread's title</title>
+</head>
+<body>
+    <main layout:fragment="content">
+        <article class="container" style="padding: 3% 0 2%;">
+            <header class="row">
+                <div class="col s12">
+                    <p  th:text="|Thread title: | +${thread.getTitle()}">Thread's title</p>
+                </div>
+                <div class="col s12">
+                    <p th:text="|Author: | +${thread.getUser().getUsername()}">Thread's author</p>
+                </div>
+                <div class="col s12">
+                    <p  th:text="|Category: | +${thread.getCategory()}">Category</p>
+                </div>
+            </header>
+            <hr></hr>
+            <section class="row">
+                <p class="col s12" style="text-align: justify; display:block; white-space:pre-wrap"
+                   th:text="|Question: | +${thread.getContent()}">Thread's content</p>
+            </section>
+            <hr></hr>
+            <header class="row">
+                <div class="col s12">
+                    <header th:text="|Posts: | + ${posts.size()}">Number of posts</header>
+                </div>
+            </header>
+            <section class="row">
+                <div class="col s12" th:each="post : ${posts}" style="margin: 3% 0 3%; padding: 2%; border-top-right-radius: 10px;
+                        border-bottom-right-radius: 10px; background: linear-gradient(to right, #e7e4e4, #f3f2f2);
+                        background: -webkit-linear-gradient(left, #e7e4e4, #f3f2f2);
+                        background: -o-linear-gradient(right, #e7e4e4, #f3f2f2);
+                        background: -moz-linear-gradient(right, #e7e4e4, #f3f2f2);">
+
+
+                    <div class="row">
+                        <p class="col s12" style="text-align: justify; display:block; white-space:pre-wrap"
+                           th:text="${post.getContent()}">
+                            Post's content
+                        </p>
+                    </div>
+                    <span class="chip left" th:if="${post.isUseful()}" th:text="|Useful|" style="background-color: #5ce1ed;">
+                        Upvoted
+                    </span>
+                    <span class="chip right" style="background-color: #f3f2f2;" th:text="${post.getUser().getUsername()}">
+                            Post's author
+                        </span>
+                    <span >
+                        <form th:action="@{/thread/{thread.getId()}}" method="post">
+                            <input type="hidden" name="id_post" th:value="${post.getId()}"/>
+                            <input type="hidden" name="state" th:value="${post.isUseful()}"/>
+                            <input type="hidden" name="action" th:value="useful"/>
+                            <input type="hidden" name="id_thread" th:value="${thread.getId()}"/>
+                            <button class="chip left" style="background-color: #5ce1ed;">Like/Unlike</button>
+                        </form>
+                    </span>
+                    <span th:if="${post.getUser().getId() == idUser}">
+                        <form th:action="@{/thread/{thread.getId()}}" method="post">
+                            <input type="hidden" name="id_post" th:value="${post.getId()}"/>
+                            <input type="hidden" name="action" th:value="delete"/>
+                            <input type="hidden" name="id_thread" th:value="${thread.getId()}"/>
+                            <button class="chip left" style="background-color: #ee6e73;">Delete</button>
+                        </form>
+                    </span>
+                </div>
+            </section>
+            <hr></hr>
+            <header class="row">
+                <div class="col s12">
+                    <header  th:text="|Add post: |">Add post</header>
+                </div>
+            </header>
+            <section>
+                <form th:action="@{/thread}" method="post">
+                    <div class="row">
+                        <div class="col s12">
+                            <label>Answer:
+                                <textarea name="content" class="materialize-textarea" minlength="5" maxlength="1024"
+                                          data-length="1024" required="required"></textarea>
+                            </label>
+                        </div>
+                    </div>
+                    <input type="hidden" name="id_thread" th:value="${thread.getId()}"/>
+                    <input type="hidden" name="id_user" th:value="${idUser}"/>
+                    <div class="row">
+                        <div class="col s12 center">
+                            <button class="btn waves-effect waves-light btn-large" type="submit" name="post">Post</button>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </article>
+    </main>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="description" content="Programming forum about Java powered by Spring Framework"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <title>Internet Forum</title>
+    <link href="/webjars/materializecss/0.100.2/css/materialize.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+</head>
+<body>
+    <style>
+        .dropdown-content li>a, .dropdown-content li>span {
+            color: white;
+        }
+    </style>
+    <nav>
+        <div class="nav-wrapper blue lighten-4">
+            <div class="container">
+                <ul id="nav-left" class="left hide-on-med-and-down">
+                    <li><a th:href="@{'/createThread'}">Create threads</a></li>
+                    <li><a th:href="@{'/threads'}">All</a></li>
+                    <!--https://www.tutorialspoint.com/materialize/materialize_dropdowns.htm-->
+                    <ul id="dropdown" class="dropdown-content blue lighten-4">
+                        <li><a th:href="@{'/threads/career'}">Career</a></li>
+                        <li class="divider"></li>
+                        <li><a th:href="@{'/threads/events'}">Events</a></li>
+                        <li class="divider"></li>
+                        <li><a th:href="@{'/threads/general'}">General</a></li>
+                        <li class="divider"></li>
+                        <li><a th:href="@{'/threads/courses'}">Courses</a></li>
+                        <li class="divider"></li>
+                        <li><a th:href="@{'/threads/entertainment'}">Entertainment</a></li>
+                    </ul>
+                    <li><a class="dropdown-button" href="#" data-activates="dropdown">Categories<i class="material-icons right">arrow_drop_down</i></a></li>
+                </ul>
+                <ul id="nav-right" class="right hide-on-med-and-down">
+                    <li><a th:href="@{'/profile'}">Profile</a></li>
+                    <li><a th:href="@{'/logout'}">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main layout:fragment="content">
+        <p>Default content</p>
+    </main>
+    <footer class="page-footer blue lighten-4"> <!--style = "width: 100%; position: absolute; left: 0; bottom: 0;"-->
+        <div class="footer-copyright blue lighten-4" style="min-height:180px !important">
+
+        </div>
+    </footer>
+    <script src="/webjars/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/webjars/materializecss/0.100.2/js/materialize.min.js"></script>
+</body>
+</html>

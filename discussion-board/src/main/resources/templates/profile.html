@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!-- Reference code : https://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html -->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/online">
+<!--/*@thymesVar id="user" type="com.discussion.board.entities.User"*/-->
+<head>
+    <title th:text="${user.getUsername()}">Title of profile view</title>
+</head>
+<body>
+    <main layout:fragment="content">
+        <article class="container" style="padding: 3% 0 2%;">
+            <header class="row">
+            </header>
+            <section class="row">
+                <div class="col s12 m6">
+                    <ul class="collection">
+                        <li class="collection-item center strong">Status</li>
+                        <li class="collection-item">
+                            <a>
+                                <span class="badge">
+                                    <span th:text="${numberOfThreads}"></span>
+                                </span>Threads:
+                            </a>
+                        </li>
+                        <li class="collection-item light-blue lighten-5">
+                            <a>
+                                <span class="badge">
+                                    <span th:text="${numberOfPosts}"></span>
+                                </span>Posts:
+                            </a>
+                        </li>
+                        <li class="collection-item">
+                            <a>
+                                <span class="badge">
+                                    <span th:text="${numberOfHelped}"></span>
+                                </span>Liked:
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col s12 m6">
+                    <ul class="collection">
+                        <li class="collection-item center">User details</li>
+                        <li class="collection-item">
+                            <a>
+                            <span class="badge">
+                                <span th:text="${user.displayContentOfOptional()}">Introduction</span>
+                            </span>Introduction:
+                            </a>
+                        </li>
+                        <li class="collection-item light-blue lighten-5">
+                            <a>
+                            <span class="badge">
+                                <span th:text="${user.getUsername()}">Name</span>
+                            </span>Name:
+                            </a>
+                        </li>
+                        <li class="collection-item">
+                            <a>
+                            <span class="badge">
+                                <span th:text="${user.displayParsedDate()}">User since</span>
+                            </span>User since:
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </section>
+
+        </article>
+    </main>
+</body>
+</html>

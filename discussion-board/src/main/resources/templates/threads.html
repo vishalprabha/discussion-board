@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!-- Reference code : https://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html -->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/online">
+<head>
+    <title>Threads | JF</title>
+</head>
+<body>
+    <main layout:fragment="content">
+        <article class="container" style="padding: 3% 0 2%;">
+            <header class="row">
+                <header class="flow-text left" th:text="${header}">Header</header>
+                <!--<blockquote class="flow-text right" th:text="|Threads: | + ${threads.size()}">Number of threads</blockquote>-->
+            </header>
+            <section class="row">
+                <div class="col s12">
+                    <table class="striped bordered centered" th:if="${threads.size() != 0}">
+                        <thead>
+                        <tr>
+                            <th>Author</th>
+                            <th>Title</th>
+                            <th>Posts</th>
+                            <th>Created</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <th:block th:each="thread : ${threads}">
+                                <tr>
+                                    <td>
+                                        <a th:href="@{'/profile/' + ${thread.getUser().getId()}}" th:text="${thread.getUser().getUsername()}">Thread's author</a>
+                                    </td>
+                                    <td>
+                                        <a th:href="@{'/thread/' + ${thread.getId()}}" th:text="${thread.getTitle()}">Thread's title</a>
+                                    </td>
+                                    <td th:text="${postRepository.countPostsByThread_Id(thread.getId())}">Number of posts</td>
+                                    <td th:text="${thread.displayParsedCreatedDate()}">Thread's created date</td>
+                                </tr>
+                            </th:block>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </article>
+    </main>
+   </body>
+</html>
