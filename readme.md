@@ -1,22 +1,6 @@
-# Project 7
-
-## Discussion Board
+# Discussion Board
 
 [Discussion board - demo video](https://youtu.be/bCqB5F68KEw)
-
-
-## Team members
-
-- [Srinivas Akhil Mallela](https://github.com/akhil77)
-- [Krishna Likhitha](https://github.com/likhitha04)
-- [Vishal Prabhachandar](https://github.com/vishalprabha)
-
-## JDK versions used (respectively)
-
-- Open JDK 1.8
-- Open JDK 1.8
-- Open JDK 1.8
-
 
 ## OO patterns in code
 
